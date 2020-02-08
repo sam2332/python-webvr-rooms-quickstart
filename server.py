@@ -1,28 +1,15 @@
-import time
-from bs4 import BeautifulSoup
-import bs4
-import requests
-import http.server
-import socketserver
-import time
-import json
 import os
+import json
+import http.server
 import webbrowser
 from queue import Queue, Empty
 import threading
 import socket
 import re
+import time
+import socketserver
 import jinja2
-import prettierfier
-from requests_toolbelt.multipart import decoder
-import urllib.parse
-from datetime import datetime
-
-orig_prettify = bs4.BeautifulSoup.prettify
-r = re.compile(r'^(\s*)', re.MULTILINE)
-def prettify(self, encoding=None, formatter="minimal", indent_width=4):
-    return r.sub(r'\1' * indent_width, orig_prettify(self, encoding, formatter))
-bs4.BeautifulSoup.prettify = prettify
+import requests
 
 def clear_logs():
     with open("http_log.txt", "w") as f:
@@ -32,9 +19,6 @@ def clear_logs():
 
 
 clear_logs()
-import socket
-import psutil
-
 
 if os.path.exists("config.json") == False:
     print("writing base config")
@@ -53,7 +37,7 @@ with open("config.json", "r") as f:
 
 
 PORT = config["port"]
-rewrite_host = "http://10.0.0.16:{}".format(PORT)
+rewrite_host = "http://localhost:{}".format(PORT)
 
 local_host = "http://localhost:{}".format(PORT)
 
@@ -276,15 +260,16 @@ seleced_page = None
 server_running = False
 failed = 0
 print('waiting for server to start.',end='')
-ping_url =rewrite_host+'/pe/api/ping'
+ping_url =rewrite_host
 try:
     while failed < 15:
         print('.',end='')
         try:
-            if requests.get(ping_url,timeout=1).status_code == 200:
+            if requests.get(ping_url,timeout=10).status_code == 200:
                 print('server online!')
                 break
         except requests.exceptions.ReadTimeout:
+            print('.',end='')
             failed +=1
             time.sleep(1)
 
@@ -300,11 +285,10 @@ try:
                 print("message from thread:", data)
 
         ret = menu(
-            "proxy edit",
+            "vr Rooms",
             {
                 "Open Links": open_links,
                 "Reload Config": reload_config,
-                "stop auto-refresh": stop_refresh,
                 ("stop" if server_running else "start") + " server": toggle_server,
                 "exit": None,
             },
