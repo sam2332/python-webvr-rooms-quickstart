@@ -87,15 +87,21 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
             path = path[0]
         if path =='/':
             path = 'index.html'
+        mime_type = 'text/html'
+        if path.endswith('.js'):
+            mime_type = 'text/javascript'
+        if path.endswith('.css'):
+            mime_type = 'text/css'
         p_f_path = 'public/'+ path
         if os.path.exists(p_f_path):
             with open(p_f_path,'rb') as f:
                 self.send_response(200)
+                self.send_header('Content-type', mime_type)
                 self.end_headers()
                 self.wfile.write(f.read())
                 return
         self.send_response(200)
-#        self.send_header(header, res.headers[header])
+        self.send_header('Content-type', 'text/html')
         self.end_headers()
         content = "test"
         try:
@@ -237,8 +243,8 @@ def toggle_server():
     return True
 
 
-def open_links():
-    webbrowser.open(rewrite_host)
+def open_link():
+    webbrowser.get('firefox').open_new_tab(rewrite_host)
     return True
 
 
@@ -287,7 +293,7 @@ try:
         ret = menu(
             "vr Rooms",
             {
-                "Open Links": open_links,
+                "Open Link": open_link,
                 "Reload Config": reload_config,
                 ("stop" if server_running else "start") + " server": toggle_server,
                 "exit": None,

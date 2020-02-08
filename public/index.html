@@ -1,31 +1,45 @@
 <!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Character Tutorial - Remix</title>
+  <link rel="stylesheet" href="./style.css">
 
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Ray.js example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<head>
+    <meta charset="UTF-8">
+    
+    <!-- Imporant meta information to make the page as rigid as possible on mobiles, to avoid unintentional zooming on the page itself  -->
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <style>
-body {
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-}
-canvas {
-}
-    </style>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Character Tutorial</title>
+    
+</head>
+<body>
+  
+  <!-- The loading element overlays all else until the model is loaded, at which point we remove this element from the DOM -->  
+<div class="loading" id="js-loader"><div class="loader"></div></div>
+  
+<div class="wrapper">
+    <!-- The canvas element is used to draw the 3D scene -->
+<canvas id="c"></canvas>
 
-    <body>
+</div>
+</body>
+</html>
 
-      <script src="node_modules/three/build/three.js"></script>
-      <script src="node_modules/three/examples/js/controls/VRControls.js"></script>
-      <script src="node_modules/three/examples/js/effects/VREffect.js"></script>
-      <script src="build/example.js"></script>
+<!-- The main Three.js file -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js'></script>
 
-    </body>
+<!-- This brings in the ability to load custom 3D objects in the .gltf file format. Blender allows the ability to export to this format out the box -->
+<script src='https://cdn.jsdelivr.net/gh/mrdoob/Three.js@r92/examples/js/loaders/GLTFLoader.js'></script>
+<!-- partial -->
+  <script  src="./script.js"></script>
 
+</body>
 </html>
