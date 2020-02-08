@@ -1,0 +1,31 @@
+{
+  "name": "ray-input",
+  "version": "0.1.2",
+  "description": "Cross platform VR input capabilities. For desktop, mobile, Cardboard, Daydream and Vive.",
+  "main": "src/ray-input.js",
+  "scripts": {
+    "build": "browserify --standalone RayInput -vdt [ babelify --presets [ es2015 ] ] src/ray-input.js -o build/ray.js  && browserify --standalone Example -vdt [ babelify --presets [ es2015 ] ] src/example/main.js -o build/example.js",
+    "start": "watchify -vdt [ babelify --presets [ es2015 ] ] src/example/main.js -o build/example.js",
+    "watch-simulator": "watchify -vdt [ babelify --presets [ es2015 ] ] src/simulator/main.js -o build/simulator.js"
+  },
+  "author": "Boris Smus",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "dat-gui": "^0.5.0",
+    "eventemitter3": "^1.2.0",
+    "grunt": "^1.0.4",
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-uglify": "^4.0.1",
+    "three": "^0.81.2",
+    "uglify": "^0.1.5",
+    "webvr-boilerplate": "^0.4.6",
+    "webvr-polyfill": "^0.9.15"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.16.0",
+    "babelify": "^7.3.0",
+    "uglify-js": "^2.7.5"
+  }
+}
