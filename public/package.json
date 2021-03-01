@@ -18,7 +18,7 @@
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-uglify": "^4.0.1",
-    "three": "^0.81.2",
+    "three": "^0.125.0",
     "uglify": "^0.1.5",
     "webvr-boilerplate": "^0.4.6",
     "webvr-polyfill": "^0.9.15"
